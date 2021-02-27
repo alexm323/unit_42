@@ -1,0 +1,67 @@
+Looking through the app it seems to be a relatively simple interface and api application 
+
+Right now the home page just shows the snack link and if we click that then we can see all of the snacks which are pulled from the json database 
+
+the endpoint calls are made from Api.js which has just a single axios GET request which brings back the data that we want , this brings us to our first task
+
+1. Make it so we can get either all of the snacks or all of the drinks depending on the button that we click 
+
+-we will need to add a button here so we can go to our Navbar component and in there we can see the link to snacks is there 
+-we can just duplicate it and make it a drinks button 
+-now we have an issue because we are currently only able to fetch snacks but we can adjust our API call to make it so that it takes into account the url we are before deciding what to make the api call to 
+
+going to update the class for the api to include the window.location.pathname 
+class SnackOrBoozeApi {
+
+  static async getSnacks() {
+    const result = await axios.get(`${BASE_API_URL}${window.location.pathname}`);
+    
+    return result.data;
+  }
+
+}
+
+never used it before but I think I can make it work and make the code more modular this way 
+
+on second thought that really sounds like an unecessary pain 
+
+  static async getSnacks() {
+    const result = await axios.get(`${BASE_API_URL}/snacks`);
+    
+    return result.data;
+  }
+  static async getDrinks() {
+    const result = await axios.get(`${BASE_API_URL}/drinks`);
+    return result.data;
+  }
+
+  i will duplicate code for now 
+
+  going to change the useeffect to get both the snacks and the booze with useeffect 
+
+changed the useEffect to get both drinks and snacks
+
+i need to adjust FoodMenu to take different props depending on the place clicked 
+
+so made a lot of small adjustments that kind of happened all over the place so it was hard to document all the changes 
+
+the drinks and snacks count are now on the home page 
+the menus work for both drinks and food which are now just passed in as props in the router 
+
+we want the ability to add in items to the menu so we are going to need something like the following data 
+
+    {
+      "id": "martini",
+      "name": "Martini",
+      "description": "An ice-cold, refreshing classic.",
+      "recipe": "Mix 3 parts vodka & 1 part dry vermouth.",
+      "serve": "Serve very cold, straight up."
+    }
+
+going to need to add in a form 
+
+just learned that the Json-server is really easy to use and i dont have to make a ton of routes or anything 
+
+going to just add in a quick form and I can import a method from our api class to make the POST request for me 
+
+having issues with the form and the select field i could just skip the select and make it an input field of type text opr something, need to update that and make sure the state gets changed for the snacks and booze once I add a new item with the form , also need to make sure to navigate to the item once its created or indicate that it has been created
