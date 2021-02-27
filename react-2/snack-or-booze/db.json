@@ -27,20 +27,6 @@
       "description": "Crisp!",
       "recipe": "Open can.",
       "serve": "Immediately."
-    },
-    {
-      "id": "coke",
-      "name": "Coke",
-      "description": "An ice-cold, refreshing classic.",
-      "recipe": "Open can",
-      "serve": "Serve very cold, straight up."
-    },
-    {
-      "id": "test-name",
-      "name": "test name",
-      "description": "test desc",
-      "recipe": "test recipe ",
-      "serve": "test serve"
     }
   ],
   "snacks": [
@@ -66,11 +52,11 @@
       "serve": "Place on tiny, precious little plates."
     },
     {
-      "id": "blurple",
-      "name": "blurple",
-      "description": "test desc",
-      "recipe": "test recipe ",
-      "serve": "test serve"
+      "id": "burger",
+      "name": "burger",
+      "description": "Meat with two buns",
+      "recipe": "cow and wheat",
+      "serve": "1 person"
     }
   ]
 }

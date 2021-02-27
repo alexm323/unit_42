@@ -65,3 +65,10 @@ just learned that the Json-server is really easy to use and i dont have to make 
 going to just add in a quick form and I can import a method from our api class to make the POST request for me 
 
 having issues with the form and the select field i could just skip the select and make it an input field of type text opr something, need to update that and make sure the state gets changed for the snacks and booze once I add a new item with the form , also need to make sure to navigate to the item once its created or indicate that it has been created
+
+i tried adding in a different method to deal with only the select field onChange and that works but react gives me a big warning about controlled components so i removed it 
+
+I still get the warning about the type field in my data 
+
+I feel like I am missing a lot of little concepts from my understanding , I have a really tentative grasp on react at this point. 
+

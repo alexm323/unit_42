@@ -11,9 +11,11 @@ import MenuItemForm from "./MenuItemForm"
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  // set the snacks and the drinks and this should update once we add an item in with our form component
   const [snacks, setSnacks] = useState([]);
   const [drinks, setDrinks] = useState([]);
-
+  // i wanted to have this run whenever I hit an endpoint of either snacks or drinks so that I can update the items without refreshing
+  // i feel like I am overthinking the react form part of this assessment and its throwing off the rest
   useEffect(() => {
     async function getBoozeAndSnacks() {
       let snacks = await SnackOrBoozeApi.getSnacks();
@@ -24,7 +26,7 @@ function App() {
     }
     getBoozeAndSnacks();
     
-  }, []);
+  }, [setDrinks,setSnacks]);
 
   if (isLoading) {
     return <p>Loading &hellip;</p>;
@@ -52,7 +54,7 @@ function App() {
               <Snack items={drinks} cantFind="/drinks" />
             </Route>
             <Route path="/addItem">
-              <MenuItemForm/>
+              <MenuItemForm />
             </Route>
             <Route>
               <p>Hmmm. I can't seem to find what you want.</p>

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import SnackOrBoozeApi from './Api'
 import slugify from 'slugify'
+import {useHistory} from 'react-router-dom'
 
-const MenuItemForm = ({addItem}) => {
+const MenuItemForm = () => {
     const initialState = {
         "name": "",
         "description": "",
@@ -17,27 +18,40 @@ const MenuItemForm = ({addItem}) => {
             [name]:value
         }));
     }
-    const handleChangeSelect = (e) => {
-        setFormData({ type: e.target.value });
-      }
+    let history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const { type,name, description, recipe, serve } = formData;
-        console.log(type)
-        SnackOrBoozeApi.createItem(type,{ id:slugify(name),name, description, recipe, serve })
-        // make the fields blank
-        setFormData(initialState)
-    }
+        // console.log(type)
+
+        const awaitCreation = async() =>{
+            await SnackOrBoozeApi.createItem(type,{ id:slugify(name),name, description, recipe, serve })
+            // console.log(`/${type}/${slugify(name)}`)
+
+            history.push( `/${type}/${slugify(name)}`)
+        }
+        awaitCreation();
+
+    }   
     return(
         <div>
-        <select onChange={handleChangeSelect}>
+
+        <form>
+            {/* <label htmlFor="itemType">Item Type </label>
+            <select name='itemType'>
                 <option value='drinks'>Booze</option>
                 <option value='snacks'>Snack</option>
-            </select>
-        <form>
-            
-            
+            </select> */}
+            <label htmlFor="type">Type </label>
+            <input
+                id="type"
+                type='text'
+                name="type"
+                placeholder="'snacks' or 'drinks'"
+                value={formData.type}
+                onChange={handleChange}
+            />
             <label htmlFor="name">Name </label>
             <input
                 id="name"
